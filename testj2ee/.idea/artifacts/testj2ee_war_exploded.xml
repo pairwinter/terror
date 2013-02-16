@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="testj2ee:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/testj2ee_war_exploded</output-path>
+    <root id="archive" name="testj2ee_war exploded.war">
+      <element id="javaee-facet-resources" facet="testj2ee/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="testj2ee" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="spring-3.1.0" />
+          <element id="library" level="project" name="spring-ws-2.0.2" />
+          <element id="library" level="project" name="spring-webflow-2.3.0" />
+          <element id="library" level="project" name="spring-security-3.0.5" />
+          <element id="library" level="project" name="spring-integration-2.0.5" />
+          <element id="library" level="project" name="spring-data-jpa-1.0.0" />
+          <element id="library" level="project" name="spring-mvc-3.0.0.RELEASE" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

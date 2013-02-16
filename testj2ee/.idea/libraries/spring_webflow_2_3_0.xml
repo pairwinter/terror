@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="spring-webflow-2.3.0" type="spring-webflow">
+    <properties version="2.3.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/org.springframework.binding.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.springframework.faces.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.springframework.js.resources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.springframework.js.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.springframework.webflow.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
