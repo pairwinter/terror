@@ -1,20 +1,72 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Medical Treatment</title>
+    <link rel="stylesheet" href="../js/jquery-ui-1.10.1.custom/css/dot-luv/jquery-ui-1.10.1.custom.css" type="text/css">
+    <link rel="stylesheet" href="../js/pqGrid/pqgrid.min.css" type="text/css">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
-    <script type="text/javascript" src="../js/jquery-1.9.0.min.js"/>
-    <script type="text/javascript" src="../js/jquery.jqGrid-4.4.4/jquery.jqGrid.min.js"/>
-    <script type="text/javascript" src="../js/jquery.jqGrid-4.4.4/i18n/grid.locale-cn.js"/>
-    <script type="text/javascript" src="../js/index.js"/>
+    <script type="text/javascript" src="../js/jquery-ui-1.9.2.custom/js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script type="text/javascript" src="../js/pqGrid/pqgrid.dev.js"></script>
+    <script type="text/javascript" src="../js/data.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/index.js" charset="utf-8"></script>
 </head>
 <body>
     <div>
-        <div class="head" id="head"></div>
-        <div class="dataContainer" id="dataContainer">
-            <
+        <div class="head" id="head"><img src="../css/image/header.png" alt=""></div>
+        <div class="searchContainer">
+            <ul class="search-ul">
+                <li>
+                    产品类别
+                    <select id="type">
+                        <option value=""></option>
+                        <option value="手术器械">手术器械</option>
+                        <option value="医疗诊察器械">医疗诊察器械</option>
+                        <option value="医用电子仪器设备">医用电子仪器设备</option>
+                    </select>
+                </li>
+                <li>展位号 <input type="text" id="boothNumber"/></li>
+                <li>关键词(公司名) <input type="text" id="key"/></li>
+                <li><input type="button" id="search" value="查询"/></li>
+            </ul>
         </div>
+        <div class="dataGrid" id="dataGrid" style="width: 100%"></div>
     </div>
 </body>
+<script type="text/javascript">
+    $(function () {
+        var options = { width: 1020, height: 400, resizable:false,draggable:false,editable:false};
+        options.colModel = [
+            { title: "公司名称", width: 700, dataType: "string" },
+            { title: "展位号", width: 200, dataType: "string", align: "right" }
+        ];
+        options.dataModel = { data: data };
+        $("#dataGrid").pqGrid(options);
+
+        $("#search").click(function(){
+            var type = $.trim($("#type").val());
+            var boothNumber = $.trim($("#boothNumber").val());
+            var key = $.trim($("#key").val());
+            var newData = [];
+            $.each(data,function(i,d){
+                var isAdd = true;
+                if(type){
+                    isAdd = (d[2].indexOf(type)>-1);
+                }
+                if(boothNumber && isAdd){
+                    isAdd = (d[1].indexOf(boothNumber)>-1);
+                }
+                if(key && isAdd){
+                    isAdd = isAdd && (d[0].indexOf(key)>-1)
+                }
+                if(isAdd){
+                    newData.push(d);
+                }
+            });
+            $("#dataGrid").pqGrid( "option", "dataModel.data", newData );
+            $("#dataGrid").pqGrid( "refreshDataAndView");
+        })
+    });
+</script>
 </html>

@@ -1,0 +1,11 @@
+.searchContainer{
+    margin: 5px;
+    height: 30px;
+}
+.search-ul{
+    list-style-type: none;
+}
+.search-ul li{
+    float: left;
+    margin-right: 30px;
+}
