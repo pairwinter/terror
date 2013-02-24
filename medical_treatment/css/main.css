@@ -10,5 +10,10 @@
     margin-right: 30px;
 }
 .companyInfo{
-
+    font-size: 12px;
+    padding: 10px;
+    background-color: beige;
+    border-radius: 5px;
+    margin-top: 10px;
+    line-height: 25px;
 }
