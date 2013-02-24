@@ -18,7 +18,7 @@ $(function () {
     options.dataModel = { data: datas };
     options.rowSelect=function(a,b){
         var data = b.data[b.rowIndx];
-        $("#companyInfo").html(data[3]);s
+        $("#companyInfo").show().html(data[3]);
     };
     options.cellSelect=function(e,ui ){
         $("#dataGrid").pqGrid( "setSelection", ui.rowIndx);
@@ -38,6 +38,7 @@ $(function () {
     $("#search").click(search);
 });
 function search(){
+    $("#companyInfo").hide();
     var type = $.trim($("#type").val());
     var boothNumber = $.trim($("#boothNumber").val());
     var key = $.trim($("#key").val());
