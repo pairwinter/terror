@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectResources">
-    <default-html-doctype>jar:file:\C:\Program Files (x86)\JetBrains\WebStorm 5.0.4\lib\webide.jar!\resources\html5-schema\html5.rnc</default-html-doctype>
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
   </component>
-  <component name="ProjectRootManager" version="2" />
+  <component name="IdProvider" IDEtalkID="A77504F29945F65253ACA9D7326A3B31" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/parse_excel/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.6" project-jdk-type="JavaSDK" />
 </project>
 

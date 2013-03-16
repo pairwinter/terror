@@ -1,3 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 13px;
+}
+table{
+    border-collapse:collapse;
+}
+.body_container{
+    width:963px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .searchContainer{
     margin: 5px;
     height: 30px;
@@ -7,14 +22,96 @@
 }
 .search-ul li{
     float: left;
-    margin-right: 30px;
+    margin-right: 10px;
+}
+.dataGrid{
+    font-size: 13px;
+    width: 951px;
+    border: 1px solid #87ceeb;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: linen;
+}
+.dataGrid table{
+    border-collapse:collapse;
+}
+.dataGrid table .cell1{
+    width: 253px;
+}
+.dataGrid table .cell2{
+    width: 682px;
+}
+.dataGrid thead th{
+    text-align: left;
+    padding: 5px;
+    background-color: steelblue;
+    color: white;
+}
+.dataGrid thead th.cell1{
+    border-radius: 5px 0 0 5px;
+}
+.dataGrid thead th.cell2{
+    border-radius: 0 5px 5px 0;
+}
+.dataGrid tbody tr {
+    text-align: left;
+}
+
+.dataGrid tbody td {
+    text-align: left;
+    border-bottom: 1px solid #87ceeb;
+    padding: 5px;
+    cursor: pointer;
+}
+.dataGrid tbody td.bgcolor {
+    background-color: seashell;
+}
+
+.dataGrid tbody td.td_mouseenter {
+    background-color: silver;
+}
+
+.dataGrid tbody td.td_click {
+    background-color: #87ceeb;
+}
+
+
+.dataGridContainer{
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 5px;
 }
 .companyInfo{
     font-size: 12px;
     padding: 10px;
-    background-color: beige;
     border-radius: 5px;
     margin-top: 10px;
     line-height: 25px;
-    display:none
+    display: none;
+    border: 1px solid silver;
+    display:none;
+    margin-bottom: 20px;
+}
+.companyInfo td{
+    border-bottom: 1px solid silver;
+}
+.companyInfo .cell1{
+    width: 60px;
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: top;
+}
+.companyInfo .cell2{
+    width: 863px;
+    text-align: left;
+}
+.companyInfo .summary{
+    border-bottom: 0px;
+}
+.companyInfo_head{
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
 }

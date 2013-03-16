@@ -3,179 +3,104 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Medical Treatment</title>
-    <link rel="stylesheet" href="../js/pqGrid/pqgrid.dev.css" type="text/css">
     <link rel="stylesheet" href="../css/main.css" type="text/css">
-    <script type="text/javascript" src="../js/jquery-ui-1.9.2.custom/js/jquery-1.8.3.js"></script>
-    <script type="text/javascript" src="../js/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
-    <script type="text/javascript" src="../js/pqGrid/pqgrid.dev.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="../js/underscore.js"></script>
+    <script type="text/javascript" src="../js/jsrender.js"></script>
+    <script type="text/javascript" src="../js/backbone.js"></script>
+    <script type="text/javascript" src="../js/data.js"></script>
+    <script type="text/javascript" src="../js/json2.js"></script>
     <script type="text/javascript" src="../js/index.js"></script>
 </head>
 <body>
-    <div style="width:1024px;margin-left: auto;margin-right: auto">
+    <div class="body_container" style="margin-top: 10px">
         <div class="head" id="head"><img src="../css/image/header.png" alt=""></div>
         <div class="searchContainer">
             <ul class="search-ul">
                 <li>
-                    产品类别
-                    <select id="type">
-                        <option value=""></option>
-                        <option value="手术器械">手术器械</option>
-                        <option value="医疗诊察器械">医疗诊察器械</option>
-                        <option value="医用电子仪器设备">医用电子仪器设备</option>
+                    产品类别：<select id="type" style="width: 280px;">
+                        <option value="">请选择</option>
+                        <option value='各科手术器械及注射穿刺器械'>各科手术器械及注射穿刺器械</option>
+                        <option value='医用超声仪器及有关设备'>医用超声仪器及有关设备</option>
+                        <option value='医用激光仪器设备'>医用激光仪器设备</option>
+                        <option value='临床检验分析仪器及医用化验和基础设备器具'>临床检验分析仪器及医用化验和基础设备器具</option>
+                        <option value='医用磁共振设备'>医用磁共振设备</option>
+                        <option value='物理治疗设备、康复设备及中医器械'>物理治疗设备、康复设备及中医器械</option>
+                        <option value='医用X射线设备及附属设备和部件'>医用X射线设备及附属设备和部件</option>
+                        <option value='医用电子仪器设备'>医用电子仪器设备</option>
+                        <option value='手术室、急救室、诊疗室设备及器具'>手术室、急救室、诊疗室设备及器具</option>
+                        <option value='病房护理设备及器具'>病房护理设备及器具</option>
+                        <option value='医用软件及信息处理系统'>医用软件及信息处理系统</option>
+                        <option value='医用高频仪器设备'>医用高频仪器设备</option>
+                        <option value='普通诊察器械'>普通诊察器械</option>
+                        <option value='耳鼻喉科设备及器具'>耳鼻喉科设备及器具</option>
+                        <option value='消毒和灭菌设备及器具'>消毒和灭菌设备及器具</option>
+                        <option value='妇产科设备及器具'>妇产科设备及器具</option>
+                        <option value='医用光学器具、仪器及内窥镜设备'>医用光学器具、仪器及内窥镜设备</option>
+                        <option value='医用高能射线设备'>医用高能射线设备</option>
+                        <option value='医用核素设备'>医用核素设备</option>
+                        <option value='口腔科设备及器具、口腔材料'>口腔科设备及器具、口腔材料</option>
+                        <option value='体外循环及血液处理设备'>体外循环及血液处理设备</option>
+                        <option value='医用耗材'>医用耗材</option>
+                        <option value='介入器材、植入材料和人工器官'>介入器材、植入材料和人工器官</option>
+                        <option value='医用冷疗、低温、冷藏设备及器具'>医用冷疗、低温、冷藏设备及器具</option>
+                        <option value='医用射线防护用品、装置'>医用射线防护用品、装置</option>
+                        <option value='眼科设备'>眼科设备</option>
+                        <option value='医疗杂志与服务'>医疗杂志与服务</option>
+                        <option value='其它'>其它</option>
                     </select>
                 </li>
-                <li>展位号 <input type="text" id="boothNumber"/></li>
-                <li>关键词(公司名) <input type="text" id="key"/></li>
-                <li><input type="button" id="search" value="查询"/></li>
+                <li>展位号：<input type="text" id="boothNumber"/></li>
+                <li>关键词(公司名)：<input type="text" id="key"/></li>
+                <li><input type="button" id="search" value="查询"/>&nbsp;&nbsp;&nbsp;<input type="button" id="reset" value="重置"/></li>
             </ul>
         </div>
-        <div class="dataGrid" id="dataGrid" style="width: 100%"></div>
+        <div class="dataGrid">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th class="cell1" style="width: 253px;">展位号</th>
+                    <th class="cell2">公司名称</th>
+                </tr>
+                </thead>
+            </table>
+            <div class="dataGridContainer">
+                <table width="100%">
+                    <tbody id="compayTableBody"></tbody>
+                </table>
+            </div>
+        </div>
         <div class="companyInfo" id="companyInfo"></div>
     </div>
-<div id="data" style="display: none">
-
-<TABLE DIR=LTR BORDER>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WH75</TD>
-    <TD DIR=LTR ALIGN=LEFT>JULLUNDUR SURGICAL WORKS</TD>
-    <TD DIR=LTR ALIGN=LEFT>电话/Tel:+91-11-25742822/42430347 &#13;&#10;<BR>传真/Fax:+91-11-25768319 &#13;&#10;<BR>E-mail:jullsurg@yahoo.co.in / jullsurgindia@yahoo.co.in &#13;&#10;<BR>Http://www.jullsurgindia.com/www.chirpodi.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>其它 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>24.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WH76</TD>
-    <TD DIR=LTR ALIGN=LEFT>费森尤斯卡比（中国）投资有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    费森尤斯卡比是一家总部位于德国，从事医药及医疗设备的跨国公司，致力于关爱急性及慢性疾病患者，是欧洲及亚洲、拉丁美洲输液治疗和临床营养领域的领先者，也是输血领域设备和耗材的主要供应商。在美国市场上，费森尤斯是静脉普药的领先供应商。截至2007年，费森尤斯卡比公司拥有2万多名员工及55个生产基地，业务机构遍及全球55个国家，2007年的销售额达到20.3亿欧元。 &#13;&#10;<BR>    在输液领域，我们的主要产品包括输注液体、血浆容量替代品、静脉用药以及相应的给药设备、输注泵、耗材以及输液管理系统。 &#13;&#10;<BR>    在临床营养领域，费森尤斯卡比是唯一在国际上同时提供肠内营养和肠外营养以及相应给药器材的公司。 &#13;&#10;<BR>    在输血领域，我们在全球范围内有9个研究和生产基地，我们的理念是提供全套的输血产品。 &#13;&#10;<BR>    在中国大陆，费森尤斯卡比拥有三家独自或合资企业，分别为华瑞制药、北京费森尤斯卡比医药有限公司、费森尤斯卡比（广州）医疗用品有限公司，员工超过千人，年销售额超过10亿人民币，处于全国医药企业的前列。 &#13;&#10;<BR>地址/Add:北京建国门外大街甲24号，东海中心1006室          &#13;&#10;<BR>邮编/Postcode:100004                         &#13;&#10;<BR>电话/Tel:+86-10-65158005-681 &#13;&#10;<BR>传真/Fax:+86-10-65157191</TD>
-    <TD DIR=LTR ALIGN=LEFT>手术室、急救室、诊疗室设备及器具 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>17.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WH76</TD>
-    <TD DIR=LTR ALIGN=LEFT>费森尤斯卡比（中国）投资有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    费森尤斯卡比是一家总部位于德国，从事医药及医疗设备的跨国公司，致力于关爱急性及慢性疾病患者，是欧洲及亚洲、拉丁美洲输液治疗和临床营养领域的领先者，也是输血领域设备和耗材的主要供应商。在美国市场上，费森尤斯是静脉普药的领先供应商。截至2007年，费森尤斯卡比公司拥有2万多名员工及55个生产基地，业务机构遍及全球55个国家，2007年的销售额达到20.3亿欧元。 &#13;&#10;<BR>    在输液领域，我们的主要产品包括输注液体、血浆容量替代品、静脉用药以及相应的给药设备、输注泵、耗材以及输液管理系统。 &#13;&#10;<BR>    在临床营养领域，费森尤斯卡比是唯一在国际上同时提供肠内营养和肠外营养以及相应给药器材的公司。 &#13;&#10;<BR>    在输血领域，我们在全球范围内有9个研究和生产基地，我们的理念是提供全套的输血产品。 &#13;&#10;<BR>    在中国大陆，费森尤斯卡比拥有三家独自或合资企业，分别为华瑞制药、北京费森尤斯卡比医药有限公司、费森尤斯卡比（广州）医疗用品有限公司，员工超过千人，年销售额超过10亿人民币，处于全国医药企业的前列。 &#13;&#10;<BR>地址/Add:北京建国门外大街甲24号，东海中心1006室          &#13;&#10;<BR>邮编/Postcode:100004                         &#13;&#10;<BR>电话/Tel:+86-10-65158005-681 &#13;&#10;<BR>传真/Fax:+86-10-65157191</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用耗材 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>22.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WH77</TD>
-    <TD DIR=LTR ALIGN=LEFT>英维利斯医疗器械（北京）有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    英维利斯医疗诊断集团公司是世界POCT的先驱和领航者。&#13;&#10;<BR>    英维利斯医疗诊断集团公司是目前世界上最大的集生产，科研和销售为一体的POCT集团公司。它是以人才济济，创新进取，科研领先，被世界医疗诊断工业公认的一支后起之秀。英维利斯医疗器械（北京）有限公司是英维利斯医疗诊断集团公司在华子公司，成立于2007年，主要的专业诊断产品涉及传染病系列，心血管系列，癌症系列，妇女健康系列，药品滥用系列等领域。我们正在为不同的病人及其家属作出坚定承诺――创新产品和服务。&#13;&#10;<BR>地址/Add:北京东三环南路甲52号顺迈金钻8A &#13;&#10;<BR>邮编/Postcode:100022&#13;&#10;<BR>电话/Tel:+86-10-87729690&#13;&#10;<BR>传真/Fax:+86-10-87733151&#13;&#10;<BR>Http://www.invmed.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>物理治疗设备及中医器械</TD>
-    <TD DIR=LTR ALIGN=RIGHT>8.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WI01</TD>
-    <TD DIR=LTR ALIGN=LEFT>乐普（北京）医疗器械股份有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    乐普（北京）医疗器械股份有限公司由国家直属高科技科研院所、留美归国学者共同投资创立，专业从事介入心血管疾病医疗器械产品的研发、生产与销售。公司总部位于北京中关村科技园区昌平园，是北京市高新技术企业、北京市企业技术中心。公司2005年成功推出拥有自主知识产权的血管内药物（雷帕霉素）洗脱支架系统（商品名：Partner），目前已形成包括药物支架、球囊扩张导管、中心静脉导管和介入配件等产品的规模化生产，年生产能力数十万套，销售网络基本覆盖全国。&#13;&#10;<BR>    公司秉承“诚信、优质、科学、创新”的宗旨，力求打造中国介入医疗器械产品的民族品牌。&#13;&#10;<BR>地址/Add:北京市西城区西直门外大街1号西环广场T2座20层&#13;&#10;<BR>邮编/Postcode:100044&#13;&#10;<BR>电话/Tel:+86-10-58305000&#13;&#10;<BR>传真/Fax:+86-10-58305100&#13;&#10;<BR>E-mail:zh.shan@gmail.com&#13;&#10;<BR>Http:// www.lepumedical.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>手术室、急救室、诊疗室设备及器具 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>17.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WI01</TD>
-    <TD DIR=LTR ALIGN=LEFT>乐普（北京）医疗器械股份有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    乐普（北京）医疗器械股份有限公司由国家直属高科技科研院所、留美归国学者共同投资创立，专业从事介入心血管疾病医疗器械产品的研发、生产与销售。公司总部位于北京中关村科技园区昌平园，是北京市高新技术企业、北京市企业技术中心。公司2005年成功推出拥有自主知识产权的血管内药物（雷帕霉素）洗脱支架系统（商品名：Partner），目前已形成包括药物支架、球囊扩张导管、中心静脉导管和介入配件等产品的规模化生产，年生产能力数十万套，销售网络基本覆盖全国。&#13;&#10;<BR>    公司秉承“诚信、优质、科学、创新”的宗旨，力求打造中国介入医疗器械产品的民族品牌。&#13;&#10;<BR>地址/Add:北京市西城区西直门外大街1号西环广场T2座20层&#13;&#10;<BR>邮编/Postcode:100044&#13;&#10;<BR>电话/Tel:+86-10-58305000&#13;&#10;<BR>传真/Fax:+86-10-58305100&#13;&#10;<BR>E-mail:zh.shan@gmail.com&#13;&#10;<BR>Http:// www.lepumedical.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>病房护理设备及器具 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>18.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WI01</TD>
-    <TD DIR=LTR ALIGN=LEFT>乐普（北京）医疗器械股份有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    乐普（北京）医疗器械股份有限公司由国家直属高科技科研院所、留美归国学者共同投资创立，专业从事介入心血管疾病医疗器械产品的研发、生产与销售。公司总部位于北京中关村科技园区昌平园，是北京市高新技术企业、北京市企业技术中心。公司2005年成功推出拥有自主知识产权的血管内药物（雷帕霉素）洗脱支架系统（商品名：Partner），目前已形成包括药物支架、球囊扩张导管、中心静脉导管和介入配件等产品的规模化生产，年生产能力数十万套，销售网络基本覆盖全国。&#13;&#10;<BR>    公司秉承“诚信、优质、科学、创新”的宗旨，力求打造中国介入医疗器械产品的民族品牌。&#13;&#10;<BR>地址/Add:北京市西城区西直门外大街1号西环广场T2座20层&#13;&#10;<BR>邮编/Postcode:100044&#13;&#10;<BR>电话/Tel:+86-10-58305000&#13;&#10;<BR>传真/Fax:+86-10-58305100&#13;&#10;<BR>E-mail:zh.shan@gmail.com&#13;&#10;<BR>Http:// www.lepumedical.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用耗材 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>22.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WJ01</TD>
-    <TD DIR=LTR ALIGN=LEFT>罗氏诊断产品（上海）有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    罗氏始创于1896年，总部位于瑞士巴塞尔，在制药和诊断领域是世界领先的以研发为基础，以创新驱动的健康事业公司之一。作为全球最大的生物技术公司，――药品和诊断，提供从早期发现、预防、诊断到治疗的创新产品与服务，从而提高了人类的健康水准和生活质量。罗氏是体外诊断领域、抗肿瘤药品和移植药品的全球领先者；是病毒学领域以及其他关键疾病领域如自身免疫性疾病、炎症、代谢和中枢神经系统疾病的市场领导者。经过百余年发展，罗氏集团的业务已遍布世界150多个国家，共拥有约79,000名员工，并与包括罗氏控股的美国基因泰克、日本中外制药在内的多个合作伙伴建立了研究与开发的业务联盟。罗氏注重永续性发展，保持良好营运表现，2007年，罗氏药品部和诊断部分别实现了总额达368亿瑞士法郎和93亿法郎的销售业绩，研发投入超过80亿瑞士法郎。&#13;&#10;<BR>    罗氏诊断拥有十分宽广的业务范围，为全世界的研究人员、医师、患者、医院和实验室提供多样化的创新性检测产品和服务。在全球有超过23,000名员工致力于科研、产品研发、产品市场运作、服务以及一体化解决方案，并在40多个国家设有分支机构。我们将致力于提供卓越的服务以提高客户的工作效率，并为客户、员工、股东和社会创造更高的价值。&#13;&#10;<BR>    罗氏诊断在中国&#13;&#10;<BR>    2000年8月，罗氏诊断产品（上海）有限公司作为外商独资公司在上海外高桥保税区成立，开展中国大陆的业务。&#13;&#10;<BR>    公司自成立以来业务增长迅猛，规模也不断壮大，数年间已成为中国体外诊断的市场领导者。公司拥有430多名员工，分布在全国53多个城市。公司总部位于上海，在北京、上海、广州、沈阳、西安、武汉及成都设立了办事处。&#13;&#10;<BR>    公司产品销售及服务网络遍布全国各地,以其一流的技术产品，配以完善的服务赢得了广泛的市场及信誉。罗氏诊断在中国市场作出坚定的承诺，将以致力于健康事业的创新，提高人类生活质量为己任，为中国的医疗健康事业和生活质量的提高作出应有的贡献。&#13;&#10;<BR>地址/Add:上海市淮海中路1045号淮海国际广场12楼&#13;&#10;<BR>邮编/Postcode:200031&#13;&#10;<BR>电话/Tel:+86-21-24121000&#13;&#10;<BR>传真/Fax:+86-21-24121188</TD>
-    <TD DIR=LTR ALIGN=LEFT>临床检验分析仪器及医用化验和基础设备器具 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>14.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WJ03</TD>
-    <TD DIR=LTR ALIGN=LEFT>上海医疗器械厂有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    上海医疗器械厂有限公司是国内规模较大，历史悠久的医疗设备生产厂家，在业界享有盛誉。目前我公司在各地都设有代表处，公司取得了中华人民共和国CMD质量体系认证、中华人民共和国国家强制认证中心(3C)质量认证。 &#13;&#10;<BR>    我公司主要生产经营产品有，直接数字化医用诊断 X 射线成像装置、多种专用 X 射线机和小型 X 射线机，各种通用和专用手术床系列。仅 X 光机我们就有通用胃场 X 光拍片机、血管造影、数字减影、直线断层、直接数字化移动式医用 X 射线机、手术室影像增强系统等几十种通用和专用设备可供您选择。我们还可为您提供多种通用医疗配件和专用设备，我们的工程和技术人员，将为您提供良好的售后服务。我们的医疗设备专家和工程师， 随时愿意与您讨论， 共同来制定出，在技术上和价格上合理的设备配套方案。 近年来，我公司加强国际合作与交流，逐步引进吸收德国、美国、法国、加拿大、日本、意大利、以色列等国际著名公司的先进技术，致力于研究高频射线源技术，数字化影像技术在医学影像学的应用，先后推出了高频X射线机系列，质量可靠，性能优异，赢得市场的广泛好评。 &#13;&#10;<BR>    我们随时欢迎世界各国的同行们，在各方面的支持与合作，我们将为您提供一个最理想的选择范围。&#13;&#10;<BR>地址/Add:上海市临青路430号&#13;&#10;<BR>邮编/Postcode:200090&#13;&#10;<BR>电话/Tel:+86-21-65436063&#13;&#10;<BR>传真/Fax:+86-21-65434128&#13;&#10;<BR>E-mail:marketing@smew.cn</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用X射线设备及附属设备和部件</TD>
-    <TD DIR=LTR ALIGN=RIGHT>10.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WJ03</TD>
-    <TD DIR=LTR ALIGN=LEFT>上海医疗器械厂有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    海医疗器械厂有限公司是国内规模较大，历史悠久的医疗设备生产厂家，在业界享有盛誉。目前我公司在各地都设有代表处，公司取得了中华人民共和国CMD质量体系认证、中华人民共和国国家强制认证中心(3C)质量认证。 &#13;&#10;<BR>    我公司主要生产经营产品有，直接数字化医用诊断 X 射线成像装置、多种专用 X 射线机和小型 X 射线机，各种通用和专用手术床系列。仅 X 光机我们就有通用胃场 X 光拍片机、血管造影、数字减影、直线断层、直接数字化移动式医用 X 射线机、手术室影像增强系统等几十种通用和专用设备可供您选择。我们还可为您提供多种通用医疗配件和专用设备，我们的工程和技术人员，将为您提供良好的售后服务。我们的医疗设备专家和工程师， 随时愿意与您讨论， 共同来制定出，在技术上和价格上合理的设备配套方案。 近年来，我公司加强国际合作与交流，逐步引进吸收德国、美国、法国、加拿大、日本、意大利、以色列等国际著名公司的先进技术，致力于研究高频射线源技术，数字化影像技术在医学影像学的应用，先后推出了高频X射线机系列，质量可靠，性能优异，赢得市场的广泛好评。 &#13;&#10;<BR>    我们随时欢迎世界各国的同行们，在各方面的支持与合作，我们将为您提供一个最理想的选择范围。&#13;&#10;<BR>地址/Add:上海市临青路430号&#13;&#10;<BR>邮编/Postcode:200090&#13;&#10;<BR>电话/Tel:+86-21-65436063&#13;&#10;<BR>传真/Fax:+86-21-65434128&#13;&#10;<BR>E-mail:marketing@smew.cn</TD>
-    <TD DIR=LTR ALIGN=LEFT>手术室、急救室、诊疗室设备及器具 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>17.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WJ05</TD>
-    <TD DIR=LTR ALIGN=LEFT>BLU-MED RESPONSE SYSTEMS</TD>
-    <TD DIR=LTR ALIGN=LEFT>邮编/Postcode:98033&#13;&#10;<BR>电话/Tel:1877/3189913&#13;&#10;<BR>传真/Fax:1360-318-9923&#13;&#10;<BR>E-mail:gb@blu-med.com&#13;&#10;<BR>Http://www.blumed.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>物理治疗设备及中医器械</TD>
-    <TD DIR=LTR ALIGN=RIGHT>8.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WJ06</TD>
-    <TD DIR=LTR ALIGN=LEFT>康高实业有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    Congo是美国Medrad公司的中国总代理。&#13;&#10;<BR>    十八年的经验，Congo已成为中国最大的注射器和消耗品供应商，超过六十人的专业人员为客户提供的优质的选购方案与完善的售后服务。&#13;&#10;<BR>    Medrad的品牌，Congo的服务，是您选择Medrad注射器的理由。&#13;&#10;<BR>地址/Add:北京市朝阳区北辰东路8号汇宾大厦1707室&#13;&#10;<BR>邮编/Postcode:100101&#13;&#10;<BR>电话/Tel:+86-10-84992172&#13;&#10;<BR>传真/Fax:+86-10-84992172&#13;&#10;<BR>北京办事处&#13;&#10;<BR>北京康高美达医疗设备销售有限公司&#13;&#10;<BR>地址/Add:北京市朝阳区北辰东路8号汇宾大厦1707室 &#13;&#10;<BR>邮编/Postcode:100101 &#13;&#10;<BR>电话/Tel:+86-10-84992172 &#13;&#10;<BR>传真/Fax:+86-10-84992172 &#13;&#10;<BR>上海办事处 &#13;&#10;<BR>上海康高美达医疗器械有限公司 &#13;&#10;<BR>地址/Add:上海市漕溪路250号银海大厦A204 A205&#13;&#10;<BR>邮编/Postcode:200235&#13;&#10;<BR>电话/Tel:+86-21- 64825561&#13;&#10;<BR>传真/Fax:+86-21- 64825563</TD>
-    <TD DIR=LTR ALIGN=LEFT>手术室、急救室、诊疗室设备及器具 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>17.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WJ07</TD>
-    <TD DIR=LTR ALIGN=LEFT>北京市老同仁光电技术中心</TD>
-    <TD DIR=LTR ALIGN=LEFT>    北京市老同仁光电技术中心创办于1993年1月29日，主要致力于心电电生理和神经电生理设备的研发与制造。设有生产部，市场部，售后部，行政部。研发队伍来自我国清华大学，北京大学，第四军医大学等著名学校。工学博士一名，工学硕士一名，医学博士一名，本科生一名，其它部门的员工均具有专科以上学历。 1994年，在国内率先推出24小时动态血压/心电监护仪，填补了我国此类产品的空白。之后多年，该产品广泛应用于医院临床，为我国高血压防治工作提供了有效解决方案。 2000年之后，研发人员主攻无创脑神经化学介质检查设备，目标是为脑科学领域提供一款可揭示脑的功能状态的设备。根据基地医院临床报告证明，该设备具有非常广泛的应用前景，有望成为脑科学领域的一朵奇葩。 我们坚持走自主研发的道路，努力打造具有前瞻科技含量的民族品牌，秉承一贯经营理念： 诚信，服务，创新。&#13;&#10;<BR>地址/Add:北京市海淀区复兴路甲36号百朗园A2座1622-1623室&#13;&#10;<BR>邮编/Postcode:100039&#13;&#10;<BR>电话/Tel:+86-10-88203962/63/64/65&#13;&#10;<BR>传真/Fax:+86-10-68236233&#13;&#10;<BR>E-mail:services@trgd.org&#13;&#10;<BR>Http://www.trgd.org</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用电子仪器设备</TD>
-    <TD DIR=LTR ALIGN=RIGHT>3.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WJ08</TD>
-    <TD DIR=LTR ALIGN=LEFT>奇目医疗器械贸易（上海）有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    奇目成像医疗器材集团（Ziehm imaging）是移动式 X 线系统市场中的龙头企业之一，30 多年以来一直致力于移动式 C 臂 X 线系统的研究、开发和生产。总部位于德国纽伦堡，拥有300多名员工和来自全球超过 70 个国家的合作伙伴，在意大利、芬兰、新加坡、中国、俄罗斯和河滨（美国）均设有子公司。 &#13;&#10;<BR>    奇目成像医疗器材集团构筑于竞争力和创造力，以及与著名大学，研究中心和医院持续的对话和密切合作，开发了具有突破性的技术，使其始终走在智能介入影像领域的最前沿。奇目成像产品以杰出的多功能性和简便的使用性而著称并适用于广泛的医疗应用领域。Ziehm C 臂在医学影像的卓越表现包括智能发生器技术，显着的剂量控制和无缝的数字网络集成。作为德国和其它许多欧洲国家市场领先者，奇目成像医疗器材集团制造的高质量的C臂产品--以创新技术为引导，为客户带来了价值，也保障了患者和医师的安全。面对广大医疗人员和患者，我们怀揣着一份强烈的责任感。&#13;&#10;<BR>地址/Add:上海市娄山关路83号新虹桥中心大厦25楼06/07室&#13;&#10;<BR>邮编/Postcode:200336&#13;&#10;<BR>电话/Tel:+86-21-62369903&#13;&#10;<BR>传真/Fax:+86-21-62369916&#13;&#10;<BR>E-mail:info@ziehm.net.cn</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用X射线设备及附属设备和部件</TD>
-    <TD DIR=LTR ALIGN=RIGHT>10.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WK01A</TD>
-    <TD DIR=LTR ALIGN=LEFT>尼虹光电贸易（上海）有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    日本光电是日本先进的制造商，研发和销售医用电子仪器，在全球几乎每一个国家。日本光电设备质量好和使用方便是众所周知的。日本光电建立于1951年，我们的使命是通过先进的医用电子技术来提高生命的质量。&#13;&#10;<BR>地址/Add:上海市吴中路259号汇锦商务大厦5楼&#13;&#10;<BR>邮编/Postcode:201103 &#13;&#10;<BR>电话/Tel:+86-21-62709819 &#13;&#10;<BR>传真/Fax:+86-21-62709819 &#13;&#10;<BR>E-mail:xin_zhao@mb1.nkc.co.jp &#13;&#10;<BR>Http://www.nihonkohden.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用电子仪器设备</TD>
-    <TD DIR=LTR ALIGN=RIGHT>3.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WK01B</TD>
-    <TD DIR=LTR ALIGN=LEFT>日本汤山公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    汤山公司是世界最大的药品摆药机生产厂家。从公司创业以来，一直领导着摆药机的发展，甚至被评价为“摆药机的历史就是汤山的历史”。智能型全自动片剂摆药机「普乐得」&#13;&#10;<BR>    高速包药,以及保证药品的准确性。&#13;&#10;<BR>    汤山整盒发药机&#13;&#10;<BR>    发药速度 400处方／小时&#13;&#10;<BR>    高速发药,拥有自动补药功能&#13;&#10;<BR>    北京扶远清隆科贸有限公司是株式会社汤山制作所在中国的授权总代理，最早在中国专业从事全自动摆药机、整盒自动发药机的销售和安装，并提供相应的售后服务与技术支持。迄今拥有国内最多的药房自动化调剂设备销售业绩，占中国药房自动化调剂设备市场的70％以上。&#13;&#10;<BR>地址/Add:北京市海淀区西三环北路50号豪柏大厦C1座1801室&#13;&#10;<BR>邮编/Postcode:100044&#13;&#10;<BR>电话/Tel:+86-10-6847-6556&#13;&#10;<BR>传真/Fax:+86-10-6847-6288&#13;&#10;<BR>地址/Add:�561-0841日本国大阪府�中市名神口３丁目３番１号&#13;&#10;<BR>电话/Tel:0081-6-6332-2538&#13;&#10;<BR>传真/Fax:0081-6-6333-1971</TD>
-    <TD DIR=LTR ALIGN=LEFT>其它 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>24.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WK03</TD>
-    <TD DIR=LTR ALIGN=LEFT>奥林巴斯（北京）销售服务有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    奥林巴斯株式会社是世界上一流的光学技术企业之一，其事业领域包括医疗、生命科学、影像和产业机械。&#13;&#10;<BR>    奥林巴斯（北京）销售服务有限公司成立于2004年7月，以谋求医疗生命科学事业在中国更大的发展为目标，在全国31个城市设立网点，主要负责医用内镜及周边设备、外科关联产品、诊疗附件和生物显微镜在中国市场的销售、维修服务和用户支持。    &#13;&#10;<BR>    奥林巴斯将倾力实现更加广泛的用户满意度，并进一步提升奥林巴斯的一流品牌价值。&#13;&#10;<BR>地址/Add:北京市朝阳区建国门外大街甲12号新华保险大厦1202室   &#13;&#10;<BR>邮编/Postcode:100022&#13;&#10;<BR>电话/Tel:+86-10-65693535&#13;&#10;<BR>传真/Fax:+86-10-65693555&#13;&#10;<BR>E-mail:mo_xu@olympus.com.cn&#13;&#10;<BR>Http://www.olympuschina.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用光学器具、仪器及内窥镜设备 </TD>
-    <TD DIR=LTR ALIGN=RIGHT>4.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WK03</TD>
-    <TD DIR=LTR ALIGN=LEFT>奥林巴斯（北京）销售服务有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    奥林巴斯株式会社是世界上一流的光学技术企业之一，其事业领域包括医疗、生命科学、影像和产业机械。&#13;&#10;<BR>    奥林巴斯（北京）销售服务有限公司成立于2004年7月，以谋求医疗生命科学事业在中国更大的发展为目标，在全国31个城市设立网点，主要负责医用内镜及周边设备、外科关联产品、诊疗附件和生物显微镜在中国市场的销售、维修服务和用户支持。    &#13;&#10;<BR>    奥林巴斯将倾力实现更加广泛的用户满意度，并进一步提升奥林巴斯的一流品牌价值。&#13;&#10;<BR>地址/Add:北京市朝阳区建国门外大街甲12号新华保险大厦1202室   &#13;&#10;<BR>邮编/Postcode:100022&#13;&#10;<BR>电话/Tel:+86-10-65693535&#13;&#10;<BR>传真/Fax:+86-10-65693555&#13;&#10;<BR>E-mail:mo_xu@olympus.com.cn&#13;&#10;<BR>Http://www.olympuschina.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用X射线设备及附属设备和部件</TD>
-    <TD DIR=LTR ALIGN=RIGHT>10.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WK05</TD>
-    <TD DIR=LTR ALIGN=LEFT>北京亿仁赛博医疗设备有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    ECYBER是位于北京经济技术开发区的中外合资企业，是亿仁集团下属的一家专业从事大型医疗设备研发、生产、销售及服务的国际化高科技医疗设备公司，为客户提供技术开发生产销售和咨询一体化的优质服务，主要研制PET、PET-MRI-CT、SPECT等高科技核医学设备。公司推出的SEEREAL32环BGO晶体的正电子发射断层扫描仪（PET系统），已达到国际先进水平。它是用于临床上诊断和指导治疗肿瘤、心血管和中枢神经系统这三类威胁人类生命健康疾病的最优手段之一。&#13;&#10;<BR>地址/Add:北京经济技术开发区永昌北路11号&#13;&#10;<BR>邮编/Postcode:100176&#13;&#10;<BR>电话/Tel:+86-10-67885599&#13;&#10;<BR>传真/Fax:+86-10-67863477 &#13;&#10;<BR>E-mail:ecyber_software@126.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用磁共振设备</TD>
-    <TD DIR=LTR ALIGN=RIGHT>9.00</TD>
-</TR>
-<TR>
-    <TD DIR=LTR ALIGN=LEFT>WK05</TD>
-    <TD DIR=LTR ALIGN=LEFT>北京亿仁赛博医疗设备有限公司</TD>
-    <TD DIR=LTR ALIGN=LEFT>    ECYBER是位于北京经济技术开发区的中外合资企业，是亿仁集团下属的一家专业从事大型医疗设备研发、生产、销售及服务的国际化高科技医疗设备公司，为客户提供技术开发生产销售和咨询一体化的优质服务，主要研制PET、PET-MRI-CT、SPECT等高科技核医学设备。公司推出的SEEREAL32环BGO晶体的正电子发射断层扫描仪（PET系统），已达到国际先进水平。它是用于临床上诊断和指导治疗肿瘤、心血管和中枢神经系统这三类威胁人类生命健康疾病的最优手段之一。&#13;&#10;<BR>地址/Add:北京经济技术开发区永昌北路11号&#13;&#10;<BR>邮编/Postcode:100176&#13;&#10;<BR>电话/Tel:+86-10-67885599&#13;&#10;<BR>传真/Fax:+86-10-67863477 &#13;&#10;<BR>E-mail:ecyber_software@126.com</TD>
-    <TD DIR=LTR ALIGN=LEFT>医用X射线设备及附属设备和部件</TD>
-    <TD DIR=LTR ALIGN=RIGHT>10.00</TD>
-</TR>
-</TABLE>
-</div>
 </body>
+<script type="text/x-jsrender" id="companyListTemplate">
+{{for #data}}
+    <td class="cell1 {{if color}}bgcolor{{/if}}">{{:boothNum}}</td><td class="cell2 {{if color}}bgcolor{{/if}}">{{:nameChina}}&nbsp;{{:nameEnglish}}</td>
+{{/for}}
+</script>
+<script type="text/x-jsrender" id="companyTemplate">
+{{for #data}}
+    <div class="companyInfo_head">企业信息</div>
+    <table>
+        <tbody>
+            <tr><td class="cell1 boothNum">展位号：</td><td class="cell2">{{:boothNum}}</td></tr>
+            <tr><td  class="cell1 name">公司名称：</td><td class="cell2">{{:nameChina}} {{:nameEnglish}}</td></tr>
+            <tr><td  class="cell1 type">所属类型：</td><td class="cell2">{{:types}}</td></tr>
+            <tr><td  class="cell1 address">地址：</td><td class="cell2">{{:address}}</td></tr>
+            <tr><td  class="cell1 postcode">邮编：</td><td class="cell2">{{:postcode}}</td></tr>
+            <tr><td  class="cell1 phoneNum">电话：</td><td class="cell2">{{:phoneNum}}</td></tr>
+            <tr><td  class="cell1 faxNum">传真：</td><td class="cell2">{{:faxNum}}</td></tr>
+            <tr><td  class="cell1 email">邮箱：</td><td class="cell2">{{:email}}</td></tr>
+            <tr><td  class="cell1 website">网址：</td><td class="cell2">{{:website}}</td></tr>
+            <tr>
+                <td  class="cell1 summary">简介：</td>
+                <td class="cell2 summary">
+                    <p>{{:summaryChina}}</p>
+                    <p>{{:summaryEnglish}}</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{{/for}}
+</script>
 </html>

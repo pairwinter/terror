@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="terror:war exploded">
+    <output-path>$PROJECT_DIR$/roo_test/target/terror-0.1.0.BUILD-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="terror/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="terror" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
