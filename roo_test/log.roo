@@ -1,0 +1,10 @@
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-02-25 22:26:56
+hint
+project --topLevelPackage com.terror
+hint web mvc
+web mvc setup
+web mvc all --package ~.web
+// [failed] selenium test --controller ~.web.TestController
+perform tests
+quit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-02-25 23:05:00

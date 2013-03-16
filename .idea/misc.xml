@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/mavenj2eespringmvc/test_artifact_id" />
+    <file type="web" url="file://$PROJECT_DIR$/roo_test" />
   </component>
   <component name="IdProvider" IDEtalkID="B703FF05C2353C511066186FEB79F425" />
+  <component name="JsfProjectComponent">
+    <option name="faceletsSupport" value="ENABLED" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/mavenj2eespringmvc/test_artifact_id/pom.xml" />
         <option value="$PROJECT_DIR$/test_maven_model/pom.xml" />
+        <option value="$PROJECT_DIR$/roo_test/pom.xml" />
       </list>
     </option>
   </component>
